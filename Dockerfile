@@ -1,12 +1,19 @@
-FROM alpine:latest
+FROM python:3.7-alpine
+ENV PYTHONUNBUFFERED 1
 
-RUN apk --update --upgrade add bash cairo pango gdk-pixbuf py3-cffi py3-pillow py-lxml
-RUN pip3 install weasyprint gunicorn flask
+RUN apk --update --upgrade --no-cache add \
+    cairo-dev pango-dev gdk-pixbuf
 
-RUN mkdir /myapp
-WORKDIR /myapp
-ADD ./wsgi.py /myapp
-RUN mkdir /root/.fonts
-ADD ./fonts/* /root/.fonts/
+ADD app.py /app/app.py
+WORKDIR /app
 
-CMD gunicorn --bind 0.0.0.0:5001 wsgi:app
+RUN set -ex \
+    && apk add --no-cache --virtual .build-deps \
+        musl-dev gcc jpeg-dev zlib-dev libffi-dev \
+    && pip install --no-cache-dir weasyprint gunicorn flask \
+    && apk del .build-deps
+
+ENV NUM_WORKERS=3
+ENV TIMEOUT=120
+
+CMD gunicorn --bind 0.0.0.0:5001 --timeout $TIMEOUT --workers $NUM_WORKERS  app:app
