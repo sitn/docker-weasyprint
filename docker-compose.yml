@@ -7,4 +7,4 @@ services:
         ports:
           - '5002:5001'
         volumes:
-          - C:/Windows/Fonts:/usr/share/fonts:ro
+          - /usr/share/fonts:/usr/share/fonts:ro
