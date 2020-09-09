@@ -2,15 +2,14 @@
 
 This is a very simple Dockerfile based on [Alpine Linux](https://www.alpinelinux.org).  It creates a very small (105MB+) [weasyprint](https://github.com/Kozea/WeasyPrint) service.  It uses a wsgi server by [aquavitae](https://github.com/aquavitae/docker-weasyprint) to provide weasyprint as a web service.
 
-A sample docker-compose configuration is as follows:
-    
-    services:
-        weasyprint:
-            build: .
-            ports:
-              - '5001:5001'
-
 To use, `POST` some HTML to `localhost:5001/pdf`.  The response will be a rendered pdf file.
+
+### Deploy
+
+Choose your production docker context, clone this repository, then:
+```powershell
+docker-compose up -d
+```
 
 ### Health Checks
 
