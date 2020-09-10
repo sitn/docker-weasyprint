@@ -6,10 +6,27 @@ To use, `POST` some HTML to `localhost:5001/pdf`.  The response will be a render
 
 ### Deploy
 
-Choose your production docker context, clone this repository, then:
+Open Powershell and clone this repository:
+```powershell
+git clone https://github.com/sitn/docker-weasyprint.git
+cd docker-weasyprint
+```
+
+Choose your production docker context: replace `<USER>` and `<SERVER_ADDRESS>` with your server address:
+
+```powershell
+$env:DOCKER_HOST="ssh://<USER>@<SERVER_ADDRESS>.ne.ch"
+```
+
+Then down and up the service:
 ```powershell
 docker-compose down
 docker-compose up -d
+```
+
+Finally, reset your docker host back to normal:
+```powershell
+$env:DOCKER_HOST=""
 ```
 
 ### Health Checks
