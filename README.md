@@ -8,6 +8,7 @@ To use, `POST` some HTML to `localhost:5001/pdf`.  The response will be a render
 
 Choose your production docker context, clone this repository, then:
 ```powershell
+docker-compose down
 docker-compose up -d
 ```
 
