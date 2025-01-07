@@ -20,8 +20,8 @@ $env:DOCKER_HOST="ssh://<USER>@<SERVER_ADDRESS>.ne.ch"
 
 Then down and up the service:
 ```powershell
-docker-compose down
-docker-compose up -d
+docker compose down
+docker compose up -d
 ```
 
 Finally, reset your docker host back to normal:
